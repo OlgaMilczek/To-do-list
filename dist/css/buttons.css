@@ -1,0 +1,55 @@
+.dellButton {
+    background: none;
+    border: 0px;
+    cursor: pointer;
+    color: rgb(155, 97, 97);
+    height: auto;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+
+.dellButton:hover {
+    transform: scale(1.05);
+}
+
+.add-button {
+    background: none;
+    border: 0px;
+    color: rgb(71, 133, 73);
+    font-weight: bold;
+    transition: 0.3s;
+    padding-left: 0;
+}
+
+.add-button:hover {
+    transform: scale(1.05);
+    color: rgb(39, 77, 40);
+}
+
+.cancel-button {
+    background: none;
+    border: 0px;
+    color: rgb(121, 121, 121);
+    transition: 0.3s;
+    padding-left: 20px;
+}
+
+.cancel-button:hover {
+    transform: scale(1.05);
+    font-weight: bold;
+}
+
+.Edit-button {
+    background: none;
+    border: 0px;
+    color: rgb(75, 107, 155);
+    font-weight: bold;
+    transition: 0.3s;
+    padding: 0;
+}
+
+.Edit-button:hover {
+    transform: scale(1.05);
+    color: rgb(57, 82, 119);
+}

@@ -1,0 +1,144 @@
+@import url('./buttons.css');
+@import url('./form.css');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(68, 60, 60);
+    margin: 0;
+}
+
+h2 {
+    margin-top: 0;
+    text-decoration: underline;
+    height: auto;
+    height: 30px;
+}
+
+h3 {
+    margin-top: 0;
+    text-decoration: underline;
+    height: auto;
+}
+
+.content {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 300px auto;
+    min-height: 100vh;
+}
+
+.project-container {
+    grid-column: 1;
+    background-color: rgb(235, 235, 235);
+    padding: 30px;
+}
+
+.toDoContainer {
+    grid-column: 2;
+    padding: 60px;
+    background-color: rgb(255, 255, 255);
+}
+
+.project {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    transition: 0.3s;
+    padding: 15px;
+}
+
+.project:hover {
+    box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.35);
+    transform: scale(1.05);
+}
+
+.add-project {
+    margin-top: 20px;
+}
+
+.to-do-item {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    padding: 10px 20px;  
+    transition: 0.3s;
+}
+
+.to-do-item:hover {
+    box-shadow: 0px 0px 5px 3px rgba(31, 31, 31, 0.35);
+    transform: scale(1.02);
+}
+
+.to-do-item p {
+    margin: 5px;
+}
+
+.to-do-item button {
+    padding-left: 20px;
+}
+
+
+.inline-start {
+    display: flex;
+    justify-content: start;
+    margin: 10px 0;
+    vertical-align: middle;
+}
+
+.inline-end {
+    display: flex;
+    justify-content: end;
+    margin: 10px 0;
+    vertical-align: middle;
+}
+
+.inline-end p, .inline-start p {
+    margin-right: 0;
+}
+
+.Normal {
+    color: rgb(31, 31, 31);
+}
+
+.High {
+    color: rgb(175, 58, 58);
+}
+
+.Low {
+    color: rgb(56, 119, 56);
+}
+
+.projectInfo {
+    background-color:rgb(245, 245, 245);
+    display: grid;
+    grid-template: "a a b" auto
+                    "c c c" auto / auto auto 100px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.projectInfo h3 {
+    grid-area: a;
+}
+
+.projectInfo p {
+    grid-area: c;
+    margin-bottom: 0;
+}
+
+.projectInfo button {
+    grid-area: b;
+    justify-self: end;
+}
+
+#add-new-item {
+    margin-bottom: 10px;
+    padding: 20px;
+}
+
+p {
+    margin: 0;
+}

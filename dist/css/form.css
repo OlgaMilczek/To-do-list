@@ -1,0 +1,55 @@
+#form {
+    padding: 30px;
+    padding-top: 10px;
+    position: fixed;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    background-color:  rgb(255, 255, 255);
+    font: inherit;
+    border-radius: 20px;
+    z-index: 10;
+    max-width: 40%;
+    box-shadow: 0px 0px 10px 0px rgba(54, 54, 54, 0.75);
+    transition: 0.3s;
+}
+
+#form.inactive {
+    transform: translate(-50%, -50%) scale(0);
+}
+
+#overlay {
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(72, 72, 73, 0.5);
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+}
+
+#overlay.active {
+    pointer-events: all;
+    opacity: 1;
+}
+
+.project-form {
+    display: block;
+    margin-top: 20px;
+}
+
+#form textarea,#form input {
+    border-radius: 4px;
+    border: 1px solid rgb(116, 116, 116);
+    width: 100%;
+    resize: none;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+#form textarea:focus, #form input:focus {
+    border: 2px solid rgb(75, 75, 75);
+}
