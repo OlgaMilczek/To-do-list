@@ -1,6 +1,6 @@
 import {myProjects} from './logic.js';
 import {createNewProjectForm} from './forms.js';
-import {renderProjects, showProject} from './render.js'
+import {renderProjects, showProject} from './render.js';
 
 
 renderProjects();

@@ -1,4 +1,4 @@
-import {createElementWithClasses, createElementWithAttributes, createButton, appendToContainer, creatLabel} from './DOMmanipulator.js'
+import {createElementWithClasses, createElementWithAttributes, createButton, appendToContainer, creatLabel} from './DOMmanipulator.js';
 
 function toggleOverlay() {
     const overlay = document.querySelector('#overlay');
@@ -28,7 +28,7 @@ function createPriorityInput(){
     const priorityHigh = document.createElement('option');
     priorityHigh.textContent = 'High';
 
-    appendToContainer(priorityInput, [priorityLow, priorityNormal, priorityHigh])
+    appendToContainer(priorityInput, [priorityLow, priorityNormal, priorityHigh]);
 
     return priorityInput;
 }
@@ -37,7 +37,7 @@ function createCancelButton(form) {
     const cancelButton = createButton(['cancel-button'],'cancel', 'Cancel');
     cancelButton.addEventListener('click', ()=> {
         cancelForm(form);
-    })
+    });
 
     return cancelButton;
 }
@@ -45,15 +45,15 @@ function createCancelButton(form) {
 function creatSmallForm() {
     const form = activeForm();
 
-    const projectTitleLabel = creatLabel(['project-form'], "Project title:");
+    const projectTitleLabel = creatLabel(['project-form'], 'Project title:');
     const projectTitleInput = createElementWithAttributes('input', [['name', 'Project-title'],
-                                                                    ['placeholder', 'Enter project title.']])
+        ['placeholder', 'Enter project title.']]);
 
-    const projectDescriptionLabel = creatLabel(['project-form'], "Project description:");
+    const projectDescriptionLabel = creatLabel(['project-form'], 'Project description:');
     const projectDescriptionInput = createElementWithAttributes('textarea', [['name', 'Project-description'],
-                                                                            ['placeholder', 'Enter project description.'],
-                                                                            ['rows', '4'],
-                                                                            ['cols', '50']]);
+        ['placeholder', 'Enter project description.'],
+        ['rows', '4'],
+        ['cols', '50']]);
 
     const addProjectButton = createButton(['add-button'],'add-new-project', '+ Add project');
 
@@ -69,22 +69,22 @@ function creatSmallForm() {
 function createLargeForm() {
     const form = activeForm();
 
-    const toDoTitleLabel =  creatLabel(['project-form'], "To-do title:");
+    const toDoTitleLabel =  creatLabel(['project-form'], 'To-do title:');
     const toDoTitleInput = createElementWithAttributes('input', [['name', 'To-do-title'],
-                                                                ['placeholder', 'Enter to-do title.']])
+        ['placeholder', 'Enter to-do title.']]);
 
-    const toDoDescriptionLabel = creatLabel(['project-form'], "To-do description:");
+    const toDoDescriptionLabel = creatLabel(['project-form'], 'To-do description:');
     const toDoDescriptionInput = createElementWithAttributes('textarea', [['name', 'To-do-description'],
-                                                                            ['placeholder', 'Enter to-do description.'],
-                                                                            ['rows', '4'],
-                                                                            ['cols', '50']]);
+        ['placeholder', 'Enter to-do description.'],
+        ['rows', '4'],
+        ['cols', '50']]);
 
-    const toDoDateLabel = creatLabel(['project-form'], "Due date:");
+    const toDoDateLabel = creatLabel(['project-form'], 'Due date:');
     const toDoDateInput = createElementWithAttributes('input', [['name', 'To-do-date'],
-                                                                ['type', 'date']])
+        ['type', 'date']]);
 
-    const priorityLabel = creatLabel(['project-form'], "Priority:");
-    const priorityInput = createPriorityInput()
+    const priorityLabel = creatLabel(['project-form'], 'Priority:');
+    const priorityInput = createPriorityInput();
 
     const addToDoButton = createButton(['add-button'],'add-new-to-does', '+ Add to does');
 
@@ -95,8 +95,8 @@ function createLargeForm() {
 
     return {form, toDoTitleLabel, toDoTitleInput, toDoDescriptionLabel, 
         toDoDescriptionInput, toDoDateLabel, toDoDateInput, priorityLabel,
-        priorityInput, addToDoButton, cancelToDoButton, buttonContainer}
+        priorityInput, addToDoButton, cancelToDoButton, buttonContainer};
 
 }
 
-export {cancelForm, creatSmallForm, createLargeForm}
+export {cancelForm, creatSmallForm, createLargeForm};

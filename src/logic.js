@@ -26,7 +26,7 @@ class TodoItem {
         this.priority = newPriority;
     }
 
-};
+}
 
 class Project {
     constructor(title, description) {
@@ -64,7 +64,7 @@ class Projects {
         else {
             this.projectsList = [];
             const exampleProject = new Project('Example project', 'This is a project based to-do list created for The Odin Project');
-            this.projectsList.push(exampleProject)
+            this.projectsList.push(exampleProject);
         }
     }
 
@@ -74,10 +74,10 @@ class Projects {
 
     deleteProject(projectTitle) {
         if (this.projectsList.length === 1) {
-            return alert('You can\'t remove only project')
+            return alert('You can\'t remove only project');
         }
         else {
-        this.projectsList = this.projectsList.filter(project => project.title !== projectTitle);
+            this.projectsList = this.projectsList.filter(project => project.title !== projectTitle);
         }
     }
 
@@ -101,7 +101,7 @@ class Projects {
 }
 
 const myProjects = new Projects();
-window.addEventListener('beforeunload', (e) => {if (myProjects.setStorage()) e.returnValue = '';})
+window.addEventListener('beforeunload', (e) => {if (myProjects.setStorage()) e.returnValue = '';});
 
 export {TodoItem, Project, myProjects};
 

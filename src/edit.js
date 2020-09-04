@@ -1,23 +1,23 @@
-import {cancelForm, creatSmallForm, createLargeForm} from './forms-overall.js'
-import {appendToContainer} from './DOMmanipulator.js'
+import {cancelForm, creatSmallForm, createLargeForm} from './forms-overall.js';
+import {appendToContainer} from './DOMmanipulator.js';
 
 function editProject(project, aftermath) {
     const projectForm = creatSmallForm();
 
     projectForm.projectTitleInput.value = project.title;
-    projectForm.projectDescriptionLabel.textContent = " Project description:";
+    projectForm.projectDescriptionLabel.textContent = ' Project description:';
     projectForm.projectDescriptionInput.textContent = project.description;
     
-    projectForm.addProjectButton.textContent = 'Edit project'
+    projectForm.addProjectButton.textContent = 'Edit project';
     projectForm.addProjectButton.addEventListener('click', () => {
         const projectTitle = projectForm.projectTitleInput.value;
         const projectDescription = projectForm.projectDescriptionInput.value;
         if (projectTitle === '') {
-            alert('Enter a project name')
+            alert('Enter a project name');
         }
         else {
             project.edit(projectTitle, projectDescription);
-            cancelForm(form);
+            cancelForm(projectForm);
             aftermath();
         }
     });
@@ -36,7 +36,7 @@ function editToDo(toDo, aftermath) {
     toDoForm.toDoDateInput.value = toDo.dueDate;
     toDoForm.priorityInput.value = toDo.priority;
 
-    toDoForm.addToDoButton.textContent = 'Edit to do'
+    toDoForm.addToDoButton.textContent = 'Edit to do';
     toDoForm.addToDoButton.addEventListener('click', () => {
         const toDoTitle = toDoForm.toDoTitleInput.value;
         const toDoDescription = toDoForm.toDoDescriptionInput.value;
@@ -46,11 +46,11 @@ function editToDo(toDo, aftermath) {
             alert ('Enter to do title!');
         }
         else if (toDoDate === '') {
-            alert ('Enter to do due date!')
+            alert ('Enter to do due date!');
         }
         else {
             toDo.edit(toDoTitle, toDoDescription, toDoDate, toDoPriority);
-            cancelForm(form);
+            cancelForm(toDoForm);
             aftermath();
         }
     });

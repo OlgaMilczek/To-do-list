@@ -1,7 +1,7 @@
 import {myProjects} from './logic.js';
 import {createToDoForm} from './forms.js';
 import {editProject, editToDo} from './edit.js';
-import {createElementWithClasses, createElementWithAttributes, createButton, appendToContainer} from './DOMmanipulator.js'
+import {createElementWithClasses, createElementWithAttributes, createButton, appendToContainer} from './DOMmanipulator.js';
 import moment from 'moment';
 
 function renderProjects() {
@@ -16,8 +16,8 @@ function renderProjects() {
         projectName.style.cursor = 'pointer';
         projectName.addEventListener('click', () => {
             showProject(currProject);
-        })
-        const dellButton = createButton(['dellButton'], 'dell-project-button', '✕')
+        });
+        const dellButton = createButton(['dellButton'], 'dell-project-button', '✕');
         dellButton.addEventListener('click', () => {
             myProjects.deleteProject(currProject.title);
             renderProjects();
@@ -35,13 +35,13 @@ function showProject(project) {
     projectTitle.textContent = project.title;
     const projectDescription = document.createElement('p');
     projectDescription.textContent = project.description;
-    const editButton = createButton(['Edit-button'], 'edit-project-button', 'Edit')
+    const editButton = createButton(['Edit-button'], 'edit-project-button', 'Edit');
     editButton.addEventListener('click', ()=> {
-        editProject(project, () => {renderProjects(); showProject(project)});
+        editProject(project, () => {renderProjects(); showProject(project);});
     });
     appendToContainer(projectInfo,[projectTitle, projectDescription, editButton]);
 
-    const newToDoesButton = createButton(['add-button'],'add-new-to-do', '+ Add new to-does')
+    const newToDoesButton = createButton(['add-button'],'add-new-to-do', '+ Add new to-does');
     newToDoesButton.addEventListener('click', ()=> {
         createToDoForm(project);
     });
@@ -57,22 +57,22 @@ function renderToDoes(project) {
     const toDoesContainer = document.querySelector('.to-does');
     toDoesContainer.innerHTML = '';
     for (let item in project.taskList){
-        const thisToDo = project.taskList[item]
+        const thisToDo = project.taskList[item];
         const itemContainer = createElementWithClasses('div', ['to-do-item', thisToDo.priority]);
         const details = createElementWithClasses('div', ['inline-start']);
-        const detailsText = document.createElement('p')
+        const detailsText = document.createElement('p');
         detailsText.textContent = 'details: ' + thisToDo.description;
         details.appendChild(detailsText);
         const priority = createElementWithClasses('div', ['inline-end']);
-        const priorityText = document.createElement('p')
+        const priorityText = document.createElement('p');
         priorityText.textContent = thisToDo.priority;
         priority.appendChild(priorityText);
         itemContainer.addEventListener('mouseenter', ()=>{
-            showDetails(details, priority, itemContainer)
-        })
+            showDetails(details, priority, itemContainer);
+        });
         itemContainer.addEventListener('mouseleave', ()=>{
             hideDetails(details, priority, itemContainer);
-        })
+        });
 
         const titleAdds =  createElementWithClasses('div', ['inline-start']);
 
@@ -83,7 +83,7 @@ function renderToDoes(project) {
         if (thisToDo.done === true) {
             checkbox.checked = true;
             itemContainer.classList.add('done');
-            title.style.textDecoration = 'line-through'
+            title.style.textDecoration = 'line-through';
         }
         checkbox.addEventListener('click', () => {
             if (checkbox.checked === true) {
@@ -102,14 +102,14 @@ function renderToDoes(project) {
         const date = document.createElement('p');
         const dateText = moment(thisToDo.dueDate).calendar().split(' ')[0];
         date.textContent = dateText;
-        const editButton = createButton(['Edit-button'], 'edit-to-do-button', 'Edit')
+        const editButton = createButton(['Edit-button'], 'edit-to-do-button', 'Edit');
         editButton.addEventListener('click', ()=> {
             editToDo(thisToDo, () => {
                 renderToDoes(project);
             });
         });
 
-        const dellButton = createButton(['dellButton'], 'dell-to-do-button', '✕')
+        const dellButton = createButton(['dellButton'], 'dell-to-do-button', '✕');
         dellButton.addEventListener('click', () => {
             project.deleteItem(thisToDo.title);
             renderToDoes(project);
