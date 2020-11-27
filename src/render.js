@@ -1,10 +1,10 @@
-import {myProjects} from './logic.js';
 import {createToDoForm} from './forms.js';
 import {editProject, editToDo} from './edit.js';
 import {createElementWithClasses, createElementWithAttributes, createButton, appendToContainer} from './DOMmanipulator.js';
 import moment from 'moment';
 
-function renderProjects() {
+function renderProjects(myProjects) {
+    console.log(myProjects);
     const container = document.querySelector('.all-projects');
     container.innerHTML = '';
     for (let i in myProjects.projectsList) {
@@ -15,12 +15,13 @@ function renderProjects() {
         projectName.textContent = myProjects.projectsList[i].title;
         projectName.style.cursor = 'pointer';
         projectName.addEventListener('click', () => {
-            showProject(currProject);
+            showProject(currProject, myProjects);
         });
         const dellButton = createButton(['dellButton'], 'dell-project-button', '✕');
         dellButton.addEventListener('click', () => {
             myProjects.deleteProject(currProject.title);
-            renderProjects();
+            console.log(myProjects);
+            renderProjects(myProjects);
         });
         project.appendChild(projectName);
         project.appendChild(dellButton);
@@ -28,7 +29,7 @@ function renderProjects() {
     }
 }
 
-function showProject(project) {
+function showProject(project, myProjects) {
     const projectInfo = document.querySelector('.projectInfo');
     projectInfo.innerHTML = '';
     const projectTitle = document.createElement('h3');
@@ -37,13 +38,15 @@ function showProject(project) {
     projectDescription.textContent = project.description;
     const editButton = createButton(['Edit-button'], 'edit-project-button', 'Edit');
     editButton.addEventListener('click', ()=> {
-        editProject(project, () => {renderProjects(); showProject(project);});
+        editProject(project, () => {
+            renderProjects(myProjects); 
+            showProject(project, myProjects);});
     });
     appendToContainer(projectInfo,[projectTitle, projectDescription, editButton]);
 
     const newToDoesButton = createButton(['add-button'],'add-new-to-do', '+ Add new to-does');
     newToDoesButton.addEventListener('click', ()=> {
-        createToDoForm(project);
+        createToDoForm(project, myProjects);
     });
 
     const buttonContainer =  document.querySelector('#add-new-item');

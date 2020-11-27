@@ -17,7 +17,7 @@ function editProject(project, aftermath) {
         }
         else {
             project.edit(projectTitle, projectDescription);
-            cancelForm(projectForm);
+            cancelForm(projectForm.form);
             aftermath();
         }
     });
@@ -50,7 +50,7 @@ function editToDo(toDo, aftermath) {
         }
         else {
             toDo.edit(toDoTitle, toDoDescription, toDoDate, toDoPriority);
-            cancelForm(toDoForm);
+            cancelForm(toDoForm.form);
             aftermath();
         }
     });
