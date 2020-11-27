@@ -60,6 +60,10 @@ h3 {
     margin-top: 20px;
 }
 
+.to-does {
+    width: 100%;
+}
+
 .to-do-item {
     display: grid;
     grid-template-columns: repeat(2, auto);
@@ -86,13 +90,15 @@ h3 {
     justify-content: start;
     margin: 10px 0;
     vertical-align: middle;
+    align-items: center;
 }
 
 .inline-end {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     margin: 10px 0;
     vertical-align: middle;
+    align-items: center;
 }
 
 .inline-end p, .inline-start p {

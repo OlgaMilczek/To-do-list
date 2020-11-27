@@ -1,9 +1,9 @@
-import {TodoItem, Project, myProjects} from './logic.js';
+import {TodoItem, Project} from './logic.js';
 import {renderProjects, showProject} from './render.js';
 import {cancelForm, creatSmallForm, createLargeForm} from './forms-overall.js';
 import {appendToContainer} from './DOMmanipulator.js';
 
-function createNewProjectForm() {
+function createNewProjectForm(projects) {
     const projectForm = creatSmallForm();
     
     projectForm.addProjectButton.addEventListener('click', () => {
@@ -14,9 +14,10 @@ function createNewProjectForm() {
         }
         else {
             const newProject = new Project(projectTitle, projectDescription);
-            myProjects.addProject(newProject);
-            renderProjects();
-            cancelForm(projectForm);
+            projects.addProject(newProject);
+            console.log(projects);
+            renderProjects(projects);
+            cancelForm(projectForm.form);
         }
     });
 
@@ -25,7 +26,7 @@ function createNewProjectForm() {
         projectForm.buttonContainer]);
 }
 
-function createToDoForm(project) {
+function createToDoForm(project, projects) {
     const toDoForm = createLargeForm();
     
     toDoForm.addToDoButton.addEventListener('click', () => {
@@ -42,8 +43,8 @@ function createToDoForm(project) {
         else {
             const newToDoes = new TodoItem(toDoTitle, toDoDescription, toDoDate, toDoPriority);
             project.addItem(newToDoes);
-            cancelForm(toDoForm);
-            showProject(project);
+            cancelForm(toDoForm.form);
+            showProject(project, projects);
         }
     });
 
