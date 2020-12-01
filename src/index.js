@@ -49,6 +49,7 @@ signInOutButton.addEventListener('click', () => {
             currentUser.name = '';
             currentUser.email = '';
             getUserProjects(currentUser);
+            window.removeEventListener('beforeunload', onClose, true);
         });
     }
     newProjectButton.removeEventListener('click', onClick, true);
