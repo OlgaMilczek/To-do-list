@@ -7,13 +7,13 @@ Link to live preview: https://to-do-app-5d572.web.app/
 
 App was created using vanilla JS, CSS and HTML. 
 During this project i pratice: 
-*Java Script classes,
-*Using webpack. 
-*DOM manimulation, 
-*Simple CSS animation,
-*Recenty I add firebase as a cloude storage, although I need to be refined.
+* Java Script classes,
+* Using webpack. 
+* DOM manimulation, 
+* Simple CSS animation,
+* Recenty I add firebase as a cloude storage, although I need to be refined.
 
-##Available Scripts
+## Available Scripts
 
 In the project directory, you can run:
 
