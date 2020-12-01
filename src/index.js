@@ -40,8 +40,6 @@ signInOutButton.addEventListener('click', () => {
     }
     else {
         const storage = userProjects.setStorage(currentUser.email);
-        console.log(currentUser.email);
-        console.log(storage);
         storage.then(() => {
             signOut();
             signInOutButton.innerHTML = 'Sign-In with Google';
@@ -63,7 +61,6 @@ const getUserProjects = (user) => {
         newProjectButton.addEventListener('click', onClick, true);
     } else {
         userProjects = getStoredProject(user.email).then(projects => {
-            console.log(projects);
             userProjects = projects;
             renderProjects(userProjects);
             showProject(userProjects.projectsList[0], userProjects);

@@ -90,7 +90,6 @@ class Projects {
                 user: user,
                 time: timeStamp(),
             });
-            console.log(storage);
             return storage;
         }
     }
@@ -103,7 +102,6 @@ class Projects {
     }
 
     async getStorage(user) {
-        console.log(user);
         let document = db.collection('to-does').doc(user);
         const storedData = await document.get();
         return storedData;
@@ -114,15 +112,11 @@ const getStoredProject = async (user) => {
     let projects = new Projects();
     let stored = await projects.getStorage(user);
     let projectsList = [];
-    console.log(stored.exists, stored);
     if (stored.exists) {
-        console.log('dupsko');
         const jsonData = stored.data().projectsList;
         projectsList = JSON.parse(jsonData);
-        console.log(jsonData, stored.exists);
         projects.setProjectList(projectsList);
     } else {
-        console.log('czarna czarna');
         projectsList = this.doExampleProject();
         projectsList[0].taskList[0].checkAsDone();
         const task1 = new TodoItem('Add yours to does', 'Your successfully Sign-In with Google now you can add to does and save your progress', new Date(), 'Normal');
