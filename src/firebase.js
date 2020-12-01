@@ -7,6 +7,17 @@ firebase.initializeApp({
     projectId: 'to-do-app-5d572'
 });  
 
+function signIn() {
+    let provider = new firebase.auth.GoogleAuthProvider();
+    return firebase.auth().signInWithPopup(provider);
+}
+
+function signOut() {
+    // Sign out of Firebase.
+    firebase.auth().signOut();
+}
+
 var db = firebase.firestore();
 
-export default db;
+
+export {db, signIn, signOut};

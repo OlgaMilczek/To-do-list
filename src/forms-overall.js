@@ -8,7 +8,6 @@ function toggleOverlay() {
 function cancelForm(form) {
     toggleOverlay();
     form.innerHTML = '';
-    console.log(form);
     form.classList.toggle('inactive');
 }
 

@@ -36,11 +36,13 @@ h3 {
 
 .top-bar__sign-in {
     padding-right: 50px;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .top-bar__logo {
+    font-family: 'Montserrat Subrayada', sans-serif;
     margin: 0.3em;
     padding: auto;
     font-size: 1.8em;
@@ -50,6 +52,10 @@ h3 {
 
 .top-bar__sign-in:hover {
     text-decoration: underline;
+}
+
+.top-bar__name {
+    margin-right: 2em;
 }
 
 .content {
