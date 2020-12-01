@@ -20,6 +20,7 @@ function renderProjects(myProjects) {
         dellButton.addEventListener('click', () => {
             myProjects.deleteProject(currProject.title);
             renderProjects(myProjects);
+            showProject(myProjects.projectsList[0], myProjects);
         });
         project.appendChild(projectName);
         project.appendChild(dellButton);

@@ -3,11 +3,15 @@ import {createNewProjectForm} from './forms.js';
 import {renderProjects, showProject} from './render.js';
 import {signIn, signOut} from './firebase.js';
 
+const newProjectButton = document.querySelector('#new-project');
+const onClick = () => {
+    createNewProjectForm(userProjects);
+};
+
 let currentUser = {
     name: '',
     email: '',
 };
-
 let userProjects;
 
 const signInOutButton = document.querySelector('.top-bar__sign-in');
@@ -32,6 +36,7 @@ signInOutButton.addEventListener('click', () => {
         getUserProjects(currentUser);
         userNameDisplay.innerHTML = 'Welcome!';
     }
+    newProjectButton.removeEventListener('click', onClick, true);
 });
 
 const getUserProjects = (user) => {
@@ -45,8 +50,7 @@ const getUserProjects = (user) => {
         userProjects = projects;
         renderProjects(userProjects);
         showProject(userProjects.projectsList[0], projects);
-        const newProjectButton = document.querySelector('#new-project');
-        newProjectButton.addEventListener('click', () => createNewProjectForm(userProjects));
+        newProjectButton.addEventListener('click', onClick, true);
     });
 };
 

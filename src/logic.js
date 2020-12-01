@@ -1,4 +1,4 @@
-import firestore from 'firebase/firestore';
+import 'firebase/firestore';
 import {db} from './firebase';
 
 class TodoItem {
@@ -86,13 +86,7 @@ class Projects {
         if (user === 'anonymous') {
             return false;
         } else {
-            console.log('kupa');
             const newStorage = JSON.stringify(this.projectsList);
-            db.collection('to-does').add({
-                name: 'kupa'
-            }).then(function() {
-                console.log('Kupa was added');
-            });
             db.collection('to-does').doc(user).set({
                 projectsList: newStorage,
                 user: user
@@ -115,7 +109,7 @@ class Projects {
                 projectsList = jsonData;
             });
         }
-        catch {
+        catch(err) {
             const exampleProject = new Project('Example project', 'This TO-DO-app is created as a part of The Odin Project curriculum');
             const task = new TodoItem('Sign in to save your progress!', 'If you wish to save your progress Sign-In with Google', new Date(), 'High');
             exampleProject.addItem(task);

@@ -1,11 +1,10 @@
-import firebase from 'firebase';
-import firestore from 'firebase/firestore';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
 
-firebase.initializeApp({
-    apiKey:  'AIzaSyA2ADHF5WNXej_CP28hu1RX18rd8ZV4ceE',
-    authDomain: 'to-do-app-5d572.firebaseapp.com',
-    projectId: 'to-do-app-5d572'
-});  
+import serverConfig from '../firebaseConfig';
+
+firebase.initializeApp(serverConfig);  
 
 function signIn() {
     let provider = new firebase.auth.GoogleAuthProvider();
