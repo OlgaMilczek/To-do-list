@@ -18,5 +18,6 @@ function signOut() {
 
 var db = firebase.firestore();
 
+let timeStamp = firebase.firestore.FieldValue.serverTimestamp;
 
-export {db, signIn, signOut};
+export {db, signIn, signOut, timeStamp};

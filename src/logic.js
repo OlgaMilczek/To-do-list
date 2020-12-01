@@ -1,5 +1,5 @@
 import 'firebase/firestore';
-import {db} from './firebase';
+import {db, timeStamp} from './firebase';
 
 class TodoItem {
     constructor(title, description, dueDate, priority) {
@@ -54,7 +54,6 @@ class Project {
 class Projects {
     constructor() {
         this.projectsList = [];
-
     }
 
     addProject(project) {
@@ -64,8 +63,7 @@ class Projects {
     deleteProject(projectTitle) {
         if (this.projectsList.length === 1) {
             return alert('You can\'t remove only project');
-        }
-        else {
+        } else {
             this.projectsList = this.projectsList.filter(project => project.title !== projectTitle);
         }
     }
@@ -83,55 +81,61 @@ class Projects {
     }
 
     setStorage(user) {
-        if (user === 'anonymous') {
+        if (user === 'anonymous' || user === '') {
             return false;
         } else {
             const newStorage = JSON.stringify(this.projectsList);
-            db.collection('to-does').doc(user).set({
+            const storage = db.collection('to-does').doc(user).set({
                 projectsList: newStorage,
-                user: user
-            }).then(function() {
-                console.log('Document successfully written!');
-            })
-                .catch(function(error) {
-                    console.error('Error writing document: ', error);
-                });
-            return true;
+                user: user,
+                time: timeStamp(),
+            });
+            console.log(storage);
+            return storage;
         }
+    }
+
+    doExampleProject() {
+        const exampleProject = new Project('Example project', 'This TO-DO-app is created as a part of The Odin Project curriculum');
+        const task = new TodoItem('Sign in to save your progress!', 'If you wish to save your progress Sign-In with Google', new Date(), 'High');
+        exampleProject.addItem(task);
+        this.projectsList.push(exampleProject);
     }
 
     async getStorage(user) {
-        let projectsList = [];
-        try {
-            let stored = await db.collection('to-does').doc(user).get();
-            stored.forEach((doc) => {
-                const jsonData = JSON.parse(doc.data().projectsList);
-                projectsList = jsonData;
-            });
-        }
-        catch(err) {
-            const exampleProject = new Project('Example project', 'This TO-DO-app is created as a part of The Odin Project curriculum');
-            const task = new TodoItem('Sign in to save your progress!', 'If you wish to save your progress Sign-In with Google', new Date(), 'High');
-            exampleProject.addItem(task);
-            if (user !== 'anonymous') {
-                task.checkAsDone();
-                const task1 = new TodoItem('Add yours to does', 'Your successfully Sign-In with Google now you can add to does and save your progress', new Date(), 'Normal');
-                exampleProject.addItem(task1);
-            }
-            projectsList.push(exampleProject);
-        }
-        return projectsList;
+        console.log(user);
+        let document = db.collection('to-does').doc(user);
+        const storedData = await document.get();
+        return storedData;
     }
 }
 
-
-const getProject = async (user) => {
+const getStoredProject = async (user) => {
     let projects = new Projects();
-    let storedProjectList = await projects.getStorage(user);
-    projects.setProjectList(storedProjectList);
+    let stored = await projects.getStorage(user);
+    let projectsList = [];
+    console.log(stored.exists, stored);
+    if (stored.exists) {
+        console.log('dupsko');
+        const jsonData = stored.data().projectsList;
+        projectsList = JSON.parse(jsonData);
+        console.log(jsonData, stored.exists);
+        projects.setProjectList(projectsList);
+    } else {
+        console.log('czarna czarna');
+        projectsList = this.doExampleProject();
+        projectsList[0].taskList[0].checkAsDone();
+        const task1 = new TodoItem('Add yours to does', 'Your successfully Sign-In with Google now you can add to does and save your progress', new Date(), 'Normal');
+        projectsList[0].addItem(task1);
+    }
     return projects;
 };
 
+const getNewProject = () => {
+    let projects = new Projects();
+    projects.doExampleProject();
+    return projects;
+};
 
-export {TodoItem, Project, getProject};
+export {TodoItem, Project, getStoredProject, getNewProject};
 
