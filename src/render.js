@@ -4,7 +4,6 @@ import {createElementWithClasses, createElementWithAttributes, createButton, app
 import moment from 'moment';
 
 function renderProjects(myProjects) {
-    console.log(myProjects);
     const container = document.querySelector('.all-projects');
     container.innerHTML = '';
     for (let i in myProjects.projectsList) {
@@ -20,8 +19,8 @@ function renderProjects(myProjects) {
         const dellButton = createButton(['dellButton'], 'dell-project-button', '✕');
         dellButton.addEventListener('click', () => {
             myProjects.deleteProject(currProject.title);
-            console.log(myProjects);
             renderProjects(myProjects);
+            showProject(myProjects.projectsList[0], myProjects);
         });
         project.appendChild(projectName);
         project.appendChild(dellButton);
@@ -103,7 +102,12 @@ function renderToDoes(project) {
         const dateAdd = createElementWithClasses('div', ['inline-end']);
 
         const date = document.createElement('p');
-        const dateText = moment(thisToDo.dueDate).calendar().split(' ')[0];
+        let dateText = moment(thisToDo.dueDate).calendar().split(' ');
+        if (dateText[0] === 'Last') {
+            dateText = `${dateText[0]} ${dateText[1]}`;
+        } else {
+            dateText = dateText[0];
+        }
         date.textContent = dateText;
         const editButton = createButton(['Edit-button'], 'edit-to-do-button', 'Edit');
         editButton.addEventListener('click', ()=> {

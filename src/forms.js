@@ -15,7 +15,6 @@ function createNewProjectForm(projects) {
         else {
             const newProject = new Project(projectTitle, projectDescription);
             projects.addProject(newProject);
-            console.log(projects);
             renderProjects(projects);
             cancelForm(projectForm.form);
         }

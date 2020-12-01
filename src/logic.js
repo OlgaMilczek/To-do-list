@@ -1,13 +1,5 @@
-import firebase from 'firebase';
-import firestore from 'firebase/firestore';
-
-firebase.initializeApp({
-    apiKey:  'AIzaSyA2ADHF5WNXej_CP28hu1RX18rd8ZV4ceE',
-    authDomain: 'to-do-app-5d572.firebaseapp.com',
-    projectId: 'to-do-app-5d572'
-});  
-
-var db = firebase.firestore();
+import 'firebase/firestore';
+import {db, timeStamp} from './firebase';
 
 class TodoItem {
     constructor(title, description, dueDate, priority) {
@@ -71,8 +63,7 @@ class Projects {
     deleteProject(projectTitle) {
         if (this.projectsList.length === 1) {
             return alert('You can\'t remove only project');
-        }
-        else {
+        } else {
             this.projectsList = this.projectsList.filter(project => project.title !== projectTitle);
         }
     }
@@ -89,47 +80,56 @@ class Projects {
         }
     }
 
-    checkStorage() {
-        //The user need to be add, then check storage should check that user exist and then fetch his data.
-        return true;
+    setStorage(user) {
+        if (user === 'anonymous' || user === '') {
+            return false;
+        } else {
+            const newStorage = JSON.stringify(this.projectsList);
+            const storage = db.collection('to-does').doc(user).set({
+                projectsList: newStorage,
+                user: user,
+                time: timeStamp(),
+            });
+            return storage;
+        }
     }
 
-    setStorage() {
-        const newStorage = JSON.stringify(this.projectsList);
-        console.log('adding storage');
-        db.collection('to-does').add({
-            projectsList: newStorage,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        return true;
+    doExampleProject() {
+        const exampleProject = new Project('Example project', 'This TO-DO-app is created as a part of The Odin Project curriculum');
+        const task = new TodoItem('Sign in to save your progress!', 'If you wish to save your progress Sign-In with Google', new Date(), 'High');
+        exampleProject.addItem(task);
+        this.projectsList.push(exampleProject);
     }
 
-    getStorage() {
-        let stored = db.collection('to-does')
-            .orderBy('timestamp', 'desc')
-            .limit(1)
-            .get();
-        return stored;
+    async getStorage(user) {
+        let document = db.collection('to-does').doc(user);
+        const storedData = await document.get();
+        return storedData;
     }
 }
 
-
-const myProjects = async () => {
+const getStoredProject = async (user) => {
     let projects = new Projects();
-    try {
-        let storage = await projects.getStorage();
-        storage.forEach((doc) => {
-            const jsonData = JSON.parse(doc.data().projectsList);
-            projects.setProjectList(jsonData);
-        });
-    } catch {
-        const exampleProject = new Project('Example project', 'This project TO-DO-app is created as a part of The Odin Project curriculum');
-        projects.projectsList.push(exampleProject);
+    let stored = await projects.getStorage(user);
+    let projectsList = [];
+    if (stored.exists) {
+        const jsonData = stored.data().projectsList;
+        projectsList = JSON.parse(jsonData);
+        projects.setProjectList(projectsList);
+    } else {
+        projectsList = this.doExampleProject();
+        projectsList[0].taskList[0].checkAsDone();
+        const task1 = new TodoItem('Add yours to does', 'Your successfully Sign-In with Google now you can add to does and save your progress', new Date(), 'Normal');
+        projectsList[0].addItem(task1);
     }
     return projects;
 };
 
+const getNewProject = () => {
+    let projects = new Projects();
+    projects.doExampleProject();
+    return projects;
+};
 
-
-export {TodoItem, Project, myProjects};
+export {TodoItem, Project, getStoredProject, getNewProject};
 
