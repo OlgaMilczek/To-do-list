@@ -1,13 +1,4 @@
-import firebase from 'firebase';
-import firestore from 'firebase/firestore';
-
-firebase.initializeApp({
-    apiKey:  'AIzaSyA2ADHF5WNXej_CP28hu1RX18rd8ZV4ceE',
-    authDomain: 'to-do-app-5d572.firebaseapp.com',
-    projectId: 'to-do-app-5d572'
-});  
-
-var db = firebase.firestore();
+import {db} from './firebase';
 
 class TodoItem {
     constructor(title, description, dueDate, priority) {
@@ -62,6 +53,7 @@ class Project {
 class Projects {
     constructor() {
         this.projectsList = [];
+
     }
 
     addProject(project) {
@@ -99,7 +91,7 @@ class Projects {
         console.log('adding storage');
         db.collection('to-does').add({
             projectsList: newStorage,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            timestamp: db.FieldValue.serverTimestamp()
         });
         return true;
     }

@@ -24,6 +24,34 @@ h3 {
     height: auto;
 }
 
+.top-bar {
+    width: 100%;
+    height: auto;
+    background-color:   rgb(109, 130, 161);
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.top-bar__sign-in {
+    padding-right: 50px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.top-bar__logo {
+    margin: 0.3em;
+    padding: auto;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+
+.top-bar__sign-in:hover {
+    text-decoration: underline;
+}
+
 .content {
     margin: 0;
     display: grid;
@@ -39,7 +67,7 @@ h3 {
 
 .toDoContainer {
     grid-column: 2;
-    padding: 60px;
+    padding: 30px;
     background-color: rgb(255, 255, 255);
 }
 
