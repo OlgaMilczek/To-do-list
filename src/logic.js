@@ -28,7 +28,6 @@ class TodoItem {
         this.dueDate = newDueDate;
         this.priority = newPriority;
     }
-
 }
 
 class Project {
@@ -117,10 +116,10 @@ const getStoredProject = async (user) => {
         projectsList = JSON.parse(jsonData);
         projects.setProjectList(projectsList);
     } else {
-        projectsList = this.doExampleProject();
-        projectsList[0].taskList[0].checkAsDone();
+        projects.doExampleProject();
+        projects.projectsList[0].taskList[0].checkAsDone();
         const task1 = new TodoItem('Add yours to does', 'Your successfully Sign-In with Google now you can add to does and save your progress', new Date(), 'Normal');
-        projectsList[0].addItem(task1);
+        projects.projectsList[0].addItem(task1);
     }
     return projects;
 };

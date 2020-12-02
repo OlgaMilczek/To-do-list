@@ -1,4 +1,4 @@
-import {getStoredProject, getNewProject} from './logic.js';
+import {TodoItem, getStoredProject, getNewProject} from './logic.js';
 import {createNewProjectForm} from './forms.js';
 import {renderProjects, showProject} from './render.js';
 import {signIn, signOut} from './firebase.js';
@@ -62,6 +62,9 @@ const getUserProjects = (user) => {
     } else {
         userProjects = getStoredProject(user.email).then(projects => {
             userProjects = projects;
+        }).catch((error) => {
+            console.log(error);
+        }).finally(() => {
             renderProjects(userProjects);
             showProject(userProjects.projectsList[0], userProjects);
             newProjectButton.addEventListener('click', onClick, true);
